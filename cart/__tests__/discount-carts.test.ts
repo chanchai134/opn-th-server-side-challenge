@@ -1,5 +1,6 @@
 import { Cart } from "../cart"
 import { Discount } from "../discount"
+
 describe('Discount - Sometimes customer apply coupon or voucher.', () => {
   let cart: Cart
   

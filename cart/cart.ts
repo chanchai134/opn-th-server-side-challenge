@@ -74,7 +74,7 @@ export class Cart {
 
     // Get number of different items, int returned.
     quantity() {
-        return Object.keys(this.products).length 
+        return Object.keys(this.productWithFreebie()).length 
     }
 
     // Get amount of total items, int returned.
