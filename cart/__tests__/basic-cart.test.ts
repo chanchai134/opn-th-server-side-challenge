@@ -62,7 +62,7 @@ describe('Basic - Cart service that can manage items.', () => {
     expect(cart.count()).toEqual({}) 
   })
 
-  it('should successfully remove ', () => {
+  it('should successfully remove', () => {
     cart.add("P01", 4)
     cart.remove("P01")
 

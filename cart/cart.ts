@@ -1,9 +1,12 @@
 import BigNumber from "bignumber.js";
 import { Discount } from "./discount"
+import { Condition } from "./condition";
+import { Reward } from "./reward";
 
 export class Cart {
     private products: Record<string, number> = {} // product_id to quantity
     private discounts: Record<string, Discount> = {}
+    private rewards: Record<string, [Condition, Reward]> = {}
 
     constructor(private customer_id?: string) {}
 
@@ -44,7 +47,7 @@ export class Cart {
 
     // Check id product is already in cart, boolean returned.
     has(product_id: string) {
-        return !!this.products[product_id]
+        return !!(this.productWithFreebie()[product_id])
     }
 
     // Check if cart contains any items, boolean returned.
@@ -52,14 +55,22 @@ export class Cart {
         return !this.quantity()
     }
 
-    private cloneProduct() {
-        const products: Record<string, number> = {}
-        Object.keys(this.products).forEach(id => { products[id] = this.products[id]})
+    private productWithFreebie() {
+        const products = { ...this.products }
+        for(const [condition, reward] of Object.values(this.rewards)) {
+            if(products[condition.product_id] && condition.type === "contains") {
+                if(products[reward.product_id]) {
+                    products[reward.product_id] += reward.quantity
+                } else {
+                    products[reward.product_id] = reward.quantity
+                }
+            }
+        }
         return products
     }
 
-    // Display list of items and quantity, json returned.
-    count = this.cloneProduct
+    // Display list of items and quantity, json returned. ?? why name count <<<<<<<<<
+    count = this.productWithFreebie
 
     // Get number of different items, int returned.
     quantity() {
@@ -96,5 +107,9 @@ export class Cart {
 
     removeDiscount(name: string) {
         delete this.discounts[name]
+    }
+
+    addFreebie(name: string, condition: Condition, reward: Reward) {
+        this.rewards[name] = [condition, reward]
     }
 }
