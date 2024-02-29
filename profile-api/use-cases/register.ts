@@ -19,7 +19,7 @@ const registerValidator = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
     name: Joi.string().required(),
-    dateOfBirth: Joi.extend(joiDate.default).date().format('YYYY-MM-DD').required(),
+    dateOfBirth: Joi.extend(joiDate.default).date().format("YYYY-MM-DD").required(),
     gender: Joi.string().valid("male", "female").required(),
     address: Joi.string().required(),
     subscribeNewsletter: Joi.boolean().required()

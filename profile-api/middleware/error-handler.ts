@@ -5,6 +5,6 @@ export const errorHandler = (err: Error, _: Request, res: Response, __: NextFunc
     if(err instanceof ProfileError) {
         res.status(400).type("text/plain").send(err.message)
     } else {
-        res.status(500).send()
+        res.status(500).type("text/plain").send("Internal Server Error")
     }
 }

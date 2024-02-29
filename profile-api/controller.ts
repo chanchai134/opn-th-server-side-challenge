@@ -2,6 +2,7 @@ import { Router } from "express"
 import { register } from "./use-cases/register"
 import { login } from "./use-cases/login"
 import { getProfile } from "./use-cases/get-profile"
+import { editProfile } from "./use-cases/edit-profile"
 import { authHandler } from "./middleware/auth-handler"
 
 export const router = Router()
@@ -19,4 +20,8 @@ router.post("/login", (req, res) => {
 
 router.get("/profile", authHandler, (req, res) => {
     res.json(getProfile(req.email!))
+})
+
+router.patch("/profile", authHandler, (req, res) => {
+    res.json(editProfile(req.email!, req.body))
 })
