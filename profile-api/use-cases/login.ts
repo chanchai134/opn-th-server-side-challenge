@@ -23,5 +23,8 @@ export const login = (login: Login): string => {
     if(!found || (found && !(database.get(login.email)!.verifyPassword(login.password)))) {
         throw new ProfileError(`email or password are wrong`)
     }
-    return "Bearer "+jwt.sign({ email: login.email }, passwordJwt)
+    return "Bearer "+jwt.sign({ 
+        email: login.email,
+        version: database.get(login.email)!.version
+    }, passwordJwt)
 }

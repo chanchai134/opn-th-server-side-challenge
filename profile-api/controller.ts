@@ -5,6 +5,7 @@ import { getProfile } from "./use-cases/get-profile"
 import { editProfile } from "./use-cases/edit-profile"
 import { deleteProfile } from "./use-cases/delete-profile"
 import { authHandler } from "./middleware/auth-handler"
+import { changPassword } from "./use-cases/change-password"
 
 export const router = Router()
 
@@ -30,5 +31,10 @@ router.patch("/profile", authHandler, (req, res) => {
 
 router.delete("/profile", authHandler, (req, res) => {
     deleteProfile(req.email!)
+    res.status(201).send()
+})
+
+router.patch("/password", authHandler, (req, res) => {
+    changPassword(req.email!, req.body)
     res.status(201).send()
 })

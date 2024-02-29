@@ -12,6 +12,9 @@ export const authHandler = (req: Request, res: Response, next: NextFunction) => 
         if(!database.has(result["email"])){
             throw new Error()
         }
+        if(!database.get(result["email"])!.verifyVersion(result["version"])) {
+            throw new Error()
+        }
         req.email = result["email"]
         next()
     } catch {
