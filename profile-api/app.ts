@@ -7,7 +7,7 @@ app.use(express.json())
 
 app.use("/profile",profile)
 
-app.use("*", (_, res: Response) => {
+app.use("*", (_, res) => {
     res.status(404).type("text/plain").send("page not found")
 })
 
