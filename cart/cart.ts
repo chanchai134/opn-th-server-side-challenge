@@ -10,11 +10,11 @@ export class Cart {
 
     // Add or increase item quantity in cart by product id.
     add(product_id: string, quantity: number) {
+        let finalQuantity = quantity
         if(this._products[product_id]) {
-            this._products[product_id] += quantity
-        } else {
-            this._products[product_id] = quantity
+            finalQuantity += this._products[product_id]
         }
+        this.update(product_id, finalQuantity)
     }
 
     // Replace item quantity or remove item from cart by product id.
@@ -43,7 +43,7 @@ export class Cart {
 
     // Check if cart contains any items, boolean returned.
     isEmpty() {
-        return this.quantity() === 0
+        return !this.quantity()
     }
 
     cloneProduct() {
