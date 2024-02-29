@@ -4,7 +4,7 @@ import { database } from "../database"
 import { Member } from "../models/member"
 import { ProfileError } from "../profile-error"
 
-const memberValidator = Joi.object({
+const registerValidator = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
     name: Joi.string().required(),
@@ -14,8 +14,8 @@ const memberValidator = Joi.object({
     subscribeNewsletter: Joi.boolean().required()
 })
 
-export const registerProfile = (member: Member): void => {
-    const { error } = memberValidator.validate(member)
+export const register = (member: Member): void => {
+    const { error } = registerValidator.validate(member)
     if(error) {
         throw new ProfileError(`${error}`)
     }

@@ -1,17 +1,13 @@
 import express from "express"
-import { profile } from "./profile-controller"
-import { errorHandling } from "./profile-error"
+import { profile } from "./controller"
+import { errorHandling } from "./middleware/error-handling"
+import { notFound } from "./middleware/not-found"
 
 const app = express()
 
 app.use(express.json())
-
-app.use("/profile", profile)
-
-app.use("*", (_, res) => {
-    res.status(404).type("text/plain").send("page not found")
-})
-
+app.use("/", profile)
+app.use("*", notFound)
 app.use(errorHandling)
 
 app.listen(3000, () => {
