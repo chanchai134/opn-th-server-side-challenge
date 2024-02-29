@@ -1,5 +1,5 @@
-import { Cart } from "./cart"
-describe('Basic - Cart service that can manage items.', () => {
+import { Cart } from "../cart"
+describe('Discount - Sometimes customer apply coupon or voucher.', () => {
   let cart: Cart
   
   beforeEach(() => {
