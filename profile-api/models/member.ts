@@ -1,11 +1,9 @@
-import { Gender } from "./gender"
-
 export interface Member {
     email: string
     password: string
     name: string
     dateOfBirth: string
-    gender: Gender
+    gender: "male" | "female"
     address: string
     subscribeNewsletter: boolean
 }
