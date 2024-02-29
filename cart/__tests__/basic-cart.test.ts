@@ -1,5 +1,5 @@
 import { Cart } from "../cart"
-describe('Discount - Sometimes customer apply coupon or voucher.', () => {
+describe('Basic - Cart service that can manage items.', () => {
   let cart: Cart
   
   beforeEach(() => {
@@ -73,7 +73,7 @@ describe('Discount - Sometimes customer apply coupon or voucher.', () => {
     expect(cart.count()).toEqual({}) 
   })
 
-  it('should successfully add, update and remove with multiple proudct', () => {
+  it('should successfully add, update and remove with multiple products', () => {
     cart.add("P01", 4)
     cart.add("P02", 4)
     cart.add("P03", 12)
