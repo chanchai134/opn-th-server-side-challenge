@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { register } from "./use-cases/register"
 import { login } from "./use-cases/login"
+import { getProfile } from "./use-cases/get-profile"
 import { authHandler } from "./middleware/auth-handler"
 
 export const router = Router()
@@ -16,8 +17,6 @@ router.post("/login", (req, res) => {
     })
 })
 
-router.get("/profile", authHandler, (_, res) => {
-    res.json({
-        token: "s"
-    })
+router.get("/profile", authHandler, (req, res) => {
+    res.json(getProfile(req.email!))
 })

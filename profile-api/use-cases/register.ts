@@ -1,8 +1,19 @@
 import Joi from "joi"
 import * as joiDate from "@joi/date"
+import dayjs from 'dayjs'
 import { database } from "../database"
-import { Member } from "../models/member"
 import { ProfileError } from "../profile-error"
+import { Member } from "../models/member"
+
+interface Register {
+    email: string
+    password: string
+    name: string
+    dateOfBirth: string
+    gender: "male" | "female"
+    address: string
+    subscribeNewsletter: boolean
+}
 
 const registerValidator = Joi.object({
     email: Joi.string().email().required(),
@@ -14,13 +25,21 @@ const registerValidator = Joi.object({
     subscribeNewsletter: Joi.boolean().required()
 })
 
-export const register = (member: Member): void => {
-    const { error } = registerValidator.validate(member)
+export const register = (payload: Register): void => {
+    const { error } = registerValidator.validate(payload)
     if(error) {
         throw new ProfileError(`${error}`)
     }
-    if(database.has(member.email)) {
-        throw new ProfileError(`email: ${member.email} is already existing`)
+    if(database.has(payload.email)) {
+        throw new ProfileError(`email: ${payload.email} is already existing`)
     }
-    database.set(member.email, member)
+    database.set(payload.email, new Member(
+        payload.email,
+        payload.password,
+        payload.name,
+        dayjs(payload.dateOfBirth, "YYYY-MM-DD"),
+        payload.gender,
+        payload.address,
+        payload.subscribeNewsletter
+    ))
 }
