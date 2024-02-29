@@ -3,7 +3,6 @@ import * as joiDate from "@joi/date"
 import dayjs from 'dayjs'
 import { database } from "../database"
 import { ProfileError } from "../profile-error"
-import { Member } from "../models/member"
 
 interface EditProfile {
     dateOfBirth?: string

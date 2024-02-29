@@ -3,6 +3,7 @@ import { register } from "./use-cases/register"
 import { login } from "./use-cases/login"
 import { getProfile } from "./use-cases/get-profile"
 import { editProfile } from "./use-cases/edit-profile"
+import { deleteProfile } from "./use-cases/delete-profile"
 import { authHandler } from "./middleware/auth-handler"
 
 export const router = Router()
@@ -23,5 +24,11 @@ router.get("/profile", authHandler, (req, res) => {
 })
 
 router.patch("/profile", authHandler, (req, res) => {
-    res.json(editProfile(req.email!, req.body))
+    editProfile(req.email!, req.body)
+    res.status(201).send()
+})
+
+router.delete("/profile", authHandler, (req, res) => {
+    deleteProfile(req.email!)
+    res.status(201).send()
 })
