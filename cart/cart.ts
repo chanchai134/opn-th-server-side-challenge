@@ -22,7 +22,7 @@ export class Cart {
         if(quantity) {
             this._products[product_id] = quantity
         } else {
-            delete this._products[product_id]
+            this.remove(product_id)
         }
     }
 
@@ -46,7 +46,7 @@ export class Cart {
         return !this.quantity()
     }
 
-    cloneProduct() {
+    private cloneProduct() {
         const products: Record<string, number> = {}
         Object.keys(this._products).forEach(id => { products[id] = this._products[id]})
         return products
