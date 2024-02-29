@@ -4,7 +4,7 @@
   "description": "",
   "main": "cart.ts",
   "scripts": {
-    "test": "node build/app.js"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
