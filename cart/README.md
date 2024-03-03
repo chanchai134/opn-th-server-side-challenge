@@ -3,11 +3,11 @@
 ### installation
 
 ```
-> npm install
+$ npm install
 ```
 
 ### run test
 
 ```
-> npm run test
+$ npm run test
 ```
