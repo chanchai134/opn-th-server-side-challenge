@@ -1,3 +1,7 @@
+# Instagram-like mobile application
+
+![architecture-diagram](/solution-architecture/architecture-diagram.png)
+
 ### Pros
 
 This architecture is totally built with AWS managed services that
